@@ -33,23 +33,25 @@ public class JwtService {
         this.issuer = issuer;
     }
 
-    public String generateAccessToken(String email) {
+    public String generateAccessToken(String email, String sessionId) {
         return JWT.create()
                 .withIssuer(issuer)
                 .withSubject(email)
                 .withJWTId(UUID.randomUUID().toString())
                 .withClaim("type", "access")
+                .withClaim("sid", sessionId)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + accessExpiration))
                 .sign(accessAlgorithm);
     }
 
-    public String generateRefreshToken(String email) {
+    public String generateRefreshToken(String email, String sessionId) {
         return JWT.create()
                 .withIssuer(issuer)
                 .withSubject(email)
                 .withJWTId(UUID.randomUUID().toString())
                 .withClaim("type", "refresh")
+                .withClaim("sid", sessionId)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + refreshExpiration))
                 .sign(refreshAlgorithm);

@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiResponse<T> {
+    private boolean isSuccess;
     private String message;
     private T data;
     private T error;
