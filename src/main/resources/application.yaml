@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ecommerce
+  
+  #Database PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: postgres
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  #JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+#JWT 
+jwt:
+  secret: 
+    access: ${JWT_ACCESS_SECRET} 
+    refresh: ${JWT_REFRESH_SECRET}
+  expiration:
+    access: 600000
+    refresh: 604800000
+  issuer: my-commerce
